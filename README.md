@@ -20,3 +20,4 @@ More info at: https://code.visualstudio.com/docs/devcontainers/containers
 * Replace the use of `New` and `delete` with a smart pointer implementation such as `std::unique_ptr` to reduce the risk of memory leaks from forgetting to deallocate memory.
 * Run the tests using tools such as Address Sanitizer or Valgrind to check for any existing memory leaks.
 * Document functions extensively using Doxygen comments.
+* Add proper error handling for invalid attempted operations (eg. pushing to an invalid index). These operations are currently ignored without alerting that there was something wrong with the request. In the case of `get_data_at_index()`, the "error" return is `nullptr`, which is a problem because `nullptr` could be a valid value for a node's data pointer.

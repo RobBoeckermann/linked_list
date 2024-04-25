@@ -1,6 +1,9 @@
 #ifndef LINKED_LIST_HPP
 #define LINKED_LIST_HPP
 
+#include <limits>
+#include <typeinfo>
+
 template <typename T> class Node {
   T *data;
   Node *next;
@@ -62,7 +65,7 @@ private:
 public:
   T *get_data_at_index(unsigned short int desired_index) {
     Node<T> *node = get_node_at_index(desired_index);
-    return node->get_data();
+    return (node) ? node->get_data() : nullptr;
   }
 
   T *get_data_at_head() { return get_data_at_index(0); }
@@ -70,6 +73,10 @@ public:
   T *get_data_at_tail() { return get_data_at_index(length - 1); }
 
   void push_to_index(T *value, unsigned short int desired_index) {
+    typedef decltype(length) LengthDataType;
+    if (desired_index < 0 || desired_index > length ||
+        length >= std::numeric_limits<LengthDataType>::max())
+      return;
     Node<T> *new_node = new Node<T>(value);
     Node<T> *node_before_desired = get_node_at_index(desired_index - 1);
     Node<T> *node_after_desired = nullptr;
@@ -109,7 +116,9 @@ public:
   void push_back(T *value) { push_to_index(value, length); }
 
   void pop_from_index(unsigned short int index) {
-    Node<T> *node = get_node_at_index(index);
+    Node<T> *node = nullptr;
+    if (!(node = get_node_at_index(index)))
+      return;
     Node<T> *node_before = node->get_previous();
     Node<T> *node_after = node->get_next();
 
