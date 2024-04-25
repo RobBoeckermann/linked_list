@@ -2,6 +2,23 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "build",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "build",
+                "SRC=${relativeFile}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },{
             "label": "rebuild_and_run",
             "type": "shell",
             "command": "make",

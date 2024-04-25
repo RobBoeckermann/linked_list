@@ -29,3 +29,5 @@ run: $(OBJDIR)/$(EXECUTABLE)
 	./$(OBJDIR)/$(EXECUTABLE)
 
 rebuild_and_run: rebuild run
+
+build: $(OBJDIR)/$(EXECUTABLE)
